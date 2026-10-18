@@ -14,6 +14,7 @@ import { esc, LINKS, ORDER, T, ext, pathHtml, ps1, R, FILES, profileHtml } from 
   // Nombres aceptados como sección o carpeta, en cualquier idioma
   const ALIASES = {
     whoami: 'whoami', about: 'whoami', 'sobre-mi': 'whoami',
+    ia: 'ia', ai: 'ia', 'ia-aplicada': 'ia',
     skills: 'skills', habilidades: 'skills', nmap: 'skills',
     experiencia: 'experiencia', experience: 'experiencia', exp: 'experiencia', git: 'experiencia',
     pitangus: 'pitangus',
@@ -21,7 +22,7 @@ import { esc, LINKS, ORDER, T, ext, pathHtml, ps1, R, FILES, profileHtml } from 
     educacion: 'educacion', 'educación': 'educacion', education: 'educacion',
     contacto: 'contacto', contact: 'contacto',
   };
-  const COMMANDS = ['help', 'whoami', 'skills', 'experiencia', 'experience', 'pitangus', 'proyectos', 'projects', 'educacion',
+  const COMMANDS = ['help', 'whoami', 'ia', 'ai', 'skills', 'experiencia', 'experience', 'pitangus', 'proyectos', 'projects', 'educacion',
     'education', 'contacto', 'contact', 'ls', 'cd', 'cat', 'open', 'pwd', 'history', 'clear', 'lang', 'cv', 'echo', 'date', 'exit'];
 
   let lang = 'es';

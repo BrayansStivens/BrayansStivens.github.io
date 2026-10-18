@@ -360,6 +360,9 @@ p { margin: 0 0 var(--s-3); }
 .step .n { color: var(--muted); margin-right: var(--s-2); }
 .pipeline p { margin: 0; font-size: var(--fs-sm); line-height: 1.6; }
 
+.pipeline.ai { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rule { margin: 0; color: var(--muted); }
+.output > .lead { margin-bottom: 0; }
 .links { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); margin: var(--s-4) 0 0; }
 .links a::before { content: "-> "; color: var(--muted); }
 
@@ -487,7 +490,7 @@ p { margin: 0 0 var(--s-3); }
   .ps1 .u { display: none; }
   .bar-shell { display: none; }
   .card { padding: var(--s-4); }
-  .pipeline { grid-template-columns: 1fr; }
+  .pipeline, .pipeline.ai { grid-template-columns: 1fr; }
   .cta { display: grid; grid-template-columns: 1fr 1fr; }
   .btn-cta { padding: 0 var(--s-2); font-size: 13px; }
   .nmap thead { display: none; }

@@ -12,14 +12,14 @@ export const LINKS = {
   pitangusRepo: 'https://github.com/Pitangus-Dev/pitangus',
 };
 
-export const ORDER = ['whoami', 'skills', 'experiencia', 'pitangus', 'proyectos', 'educacion', 'contacto'];
+export const ORDER = ['whoami', 'ia', 'skills', 'experiencia', 'pitangus', 'proyectos', 'educacion', 'contacto'];
 
 export const T = {
   es: {
-    title: 'Brayan Sepúlveda · Ingeniero de software, AppSec y SecOps',
-    desc: 'Ingeniero de software y especialista en ciberseguridad en Medellín. Automatizo SAST, DAST, SCA e IaC en el pipeline (DevSecOps). Creador de Pitangus.',
+    title: 'Brayan Sepúlveda · AppSec, DevSecOps y seguridad de IA',
+    desc: 'Ingeniero de software y AppSec en Medellín. Automatizo SAST, DAST, SCA e IaC en CI/CD, aseguro código y apps con IA (OWASP LLM) y creé Pitangus.',
     ogLocale: 'es_CO',
-    jobTitle: 'Ingeniero de software · SecOps / AppSec',
+    jobTitle: 'Ingeniero de software · AppSec / DevSecOps · Seguridad de IA',
     ui: {
       lang: 'EN', langLabel: 'Switch to English',
       view: 'Vista', profile: 'perfil', terminal: 'terminal',
@@ -32,12 +32,13 @@ export const T = {
         'Escribe help para ver todo, o pulsa un comando de abajo. Lo que lista ls también se puede pulsar. exit vuelve a la vista de perfil.',
       ],
     },
-    titles: { whoami: 'Sobre mí', skills: 'Habilidades', experiencia: 'Experiencia', pitangus: 'Pitangus', proyectos: 'Proyectos', educacion: 'Educación', contacto: 'Contacto' },
-    dirs: { whoami: 'sobre-mi', skills: 'skills', experiencia: 'experiencia', pitangus: 'pitangus', proyectos: 'proyectos', educacion: 'educacion', contacto: 'contacto' },
+    titles: { whoami: 'Sobre mí', ia: 'IA aplicada', skills: 'Habilidades', experiencia: 'Experiencia', pitangus: 'Pitangus', proyectos: 'Proyectos', educacion: 'Educación', contacto: 'Contacto' },
+    dirs: { whoami: 'sobre-mi', ia: 'ia', skills: 'skills', experiencia: 'experiencia', pitangus: 'pitangus', proyectos: 'proyectos', educacion: 'educacion', contacto: 'contacto' },
     files: { profile: 'perfil.txt', status: 'estado.txt' },
     cta: { mail: 'Escríbeme', linkedin: 'LinkedIn', pitangus: 'Ver Pitangus', terminal: 'Abrir terminal' },
     cmds: {
       whoami: 'whoami',
+      ia: 'cat ia/*.md',
       skills: 'nmap -sV --script=skills brayan',
       experiencia: 'git log --graph experiencia',
       pitangus: 'pitangus --about',
@@ -46,28 +47,40 @@ export const T = {
       contacto: 'contact --secure',
     },
     whoami: {
-      role: 'Ingeniero de software · SecOps / AppSec',
-      place: 'Medellín, Colombia · UTC−5',
-      summary: 'Desarrollador de origen que hoy protege el ciclo de vida del software. Convierto requisitos normativos y de riesgo en controles automatizados dentro del pipeline: SAST, DAST, SCA e IaC, con enfoque shift-left. Priorizo el riesgo real, no el ruido.',
-      status: 'Abierto a proyectos freelance y consultoría en AppSec.',
+      role: 'Ingeniero de software · AppSec / DevSecOps · Seguridad de IA',
+      place: 'Medellín, Colombia · UTC−5 · 4+ años en software, 2+ en seguridad',
+      summary: 'Llevo más de cuatro años construyendo software y más de dos asegurándolo. En Siigo lidero la gestión de vulnerabilidades: automatizo SAST, DAST, SCA, secretos e IaC dentro de los pipelines para que los equipos corrijan antes de desplegar, y priorizo por riesgo real, no por volumen de alertas. Trabajo con agentes de IA a diario y sé dónde fallan: reviso el código que generan y las aplicaciones con LLM.',
+      status: 'Disponible para proyectos freelance y consultoría en AppSec, DevSecOps y seguridad de IA.',
+    },
+    ia: {
+      lead: 'Uso IA para entregar más rápido y sé cómo asegurarla. Las dos cosas a la vez, con revisión humana en cada paso.',
+      items: [
+        ['desarrollo con agentes', 'Construyo con agentes de IA como Claude Code y reviso cada cambio: diff, pruebas y auditoría de seguridad antes del merge. Pitangus se desarrolló así.', 'agentes.md'],
+        ['código generado por IA', 'Detecto los errores que más repite el código escrito con IA. Pitangus trae reglas propias para eso y para el control de acceso en Supabase y Firebase.', 'codigo-ia.md'],
+        ['aplicaciones con LLM', 'Reviso aplicaciones con LLM, agentes y RAG: prompt injection, salida sin validar, fuga de datos y agencia excesiva, según el OWASP Top 10 para LLM y MITRE ATLAS.', 'apps-llm.md'],
+        ['operación de seguridad', 'En Siigo uso IA para acelerar el triage de hallazgos, la redacción de reportes y la recolección de evidencias de auditoría.', 'operacion.md'],
+      ],
+      rule: 'Regla de trabajo: la herramienta propone, yo dispongo. Verifico cada hallazgo y cada cambio antes de aplicarlo.',
     },
     skills: {
       report: 'Nmap scan report for brayan (Medellín, CO)',
       up: 'Host is up (0.0012s latency).',
       head: ['PORT', 'STATE', 'SERVICE', 'VERSION'],
       rows: [
-        ['443/tcp', 'appsec', 'SAST · DAST · SCA · IaC · detección de secretos'],
+        ['443/tcp', 'appsec', 'SAST · DAST · SCA · IaC · detección de secretos · modelado de amenazas'],
         ['22/tcp', 'secops', 'Gestión de vulnerabilidades (TVM) · triage de pentest · remediación'],
-        ['8443/tcp', 'devsecops', 'GitHub Enterprise · GitHub Actions · shift-left'],
+        ['8443/tcp', 'devsecops', 'GitHub Enterprise · GitHub Actions · CI/CD · shift-left'],
+        ['11434/tcp', 'ai-security', 'OWASP Top 10 para LLM · prompt injection · MITRE ATLAS · código generado por IA'],
         ['2376/tcp', 'containers', 'Docker · Trivy · Grype · Checkov'],
-        ['9443/tcp', 'grc', 'Evidencias de auditoría · cumplimiento normativo'],
-        ['3000/tcp', 'fullstack', 'Node.js · NestJS · React · Angular · diseño SOLID'],
-        ['5432/tcp', 'data', 'SQL · NoSQL'],
+        ['9443/tcp', 'grc', 'Evidencias de auditoría · SOC 2 · ISO 27001 · cumplimiento normativo'],
+        ['3000/tcp', 'fullstack', 'Node.js · NestJS · React · Angular · Python · diseño SOLID'],
+        ['5432/tcp', 'data', 'PostgreSQL · SQL · NoSQL'],
       ],
       scripts: [
-        ['lenguajes', 'Python, JavaScript, Shell, Go, C#, Java, PHP'],
+        ['lenguajes', 'Python, JavaScript, TypeScript, Shell, Go, C#, Java, PHP'],
         ['iac', 'Terraform, Docker, Azure'],
-        ['herramientas', 'Checkov, Grype, Trivy, Dependabot, Gitleaks, TruffleHog, Fluid Attacks'],
+        ['herramientas', 'Checkov, Grype, Trivy, Dependabot, Betterleaks, TruffleHog, Opengrep, OSV-Scanner, zizmor, Fluid Attacks'],
+        ['ia', 'Claude Code y agentes de IA, OWASP Top 10 para LLM, MITRE ATLAS'],
       ],
       done: 'Nmap done: 1 IP address (1 host up) scanned',
     },
@@ -76,18 +89,18 @@ export const T = {
         hash: 'a3f9c21', head: true, company: 'Siigo', role: 'SecOps / Desarrollador FullStack', date: 'mar 2024 — hoy · Medellín',
         bullets: [
           'Lidero los dominios TVM (Threat & Vulnerability Management) e IPY (Information Protection & Governance), alineados con la estrategia global de ciberseguridad.',
-          'Diseñé automatizaciones de detección y remediación temprana (SAST, DAST, SCA e IaC) que reducen el tiempo de exposición en los pipelines.',
-          'Administro GitHub Enterprise: controles de acceso, seguridad y flujos automatizados para los equipos de ingeniería.',
-          'Gestiono reportes de pentesting internos y externos y coordino los planes de mitigación con desarrollo.',
-          'Agilicé la recolección de evidencias para auditorías de cumplimiento (GRC).',
-          'Integré escaneo continuo con Checkov, Grype, Trivy, Dependabot, Gitleaks, TruffleHog y Fluid Attacks junto al equipo SRE.',
+          'Automaticé la detección y remediación temprana en los pipelines (SAST, DAST, SCA, secretos e IaC) para acortar el tiempo de exposición de cada vulnerabilidad.',
+          'Integré escaneo continuo con Checkov, Grype, Trivy, Dependabot, Betterleaks, TruffleHog y Fluid Attacks junto al equipo SRE.',
+          'Administro GitHub Enterprise: controles de acceso, políticas de seguridad y flujos automatizados para los equipos de ingeniería.',
+          'Gestiono los reportes de pentesting internos y externos y coordino con desarrollo los planes de mitigación hasta el cierre.',
+          'Agilicé la recolección de evidencias para auditorías GRC e incorporé IA al triage de hallazgos y a los reportes, siempre con validación humana.',
         ],
-        tags: ['GitHub Enterprise', 'Terraform', 'Docker', 'Python', 'Shell', 'Go', 'C#', 'Azure'],
+        tags: ['GitHub Enterprise', 'GitHub Actions', 'Terraform', 'Docker', 'Python', 'Go', 'Azure', 'IA'],
       },
       {
         hash: '7be1d04', company: 'Elite Automation Group', role: 'Desarrollador de software', date: 'ago 2023 — mar 2024',
         bullets: [
-          'Automaticé la gestión masiva de tiendas en Amazon y Walmart con sus APIs oficiales.',
+          'Automaticé la gestión masiva de tiendas en Amazon y Walmart con sus APIs oficiales, reduciendo tiempos operativos y errores manuales.',
           'Construí software interno para administradores y operarios de bodega en EE. UU.: logística, devoluciones e inventario.',
         ],
         tags: ['Python', 'JavaScript', 'APIs de Amazon y Walmart'],
@@ -95,7 +108,7 @@ export const T = {
       {
         hash: '51c0e9a', company: 'Operación Éxito Colombia', role: 'Desarrollador de software', date: 'feb 2023 — sep 2023',
         bullets: [
-          'Único desarrollador de la compañía: software a medida y mantenimiento de todos los proyectos.',
+          'Único desarrollador de la compañía: diseñé, construí y mantuve todo su software a medida.',
           'Personalicé Moodle para escuelas y alcaldías y construí aplicaciones educativas con React, Angular y Spring Boot.',
         ],
         tags: ['React', 'Angular', 'Spring Boot', 'PHP', 'Moodle'],
@@ -111,9 +124,9 @@ export const T = {
     pitangus: {
       meta: 'v0.15 · beta · AGPL-3.0',
       tagline: 'Detéctalo. Corrígelo. Demuéstralo.',
-      lead: 'Seguridad de aplicaciones autoalojada y de código abierto que nunca envía tu código a ningún lado. La creé y hoy la publica Arodium, la empresa que cofundé.',
+      lead: 'Las herramientas de seguridad avisan mucho y demuestran poco. Pitangus es AppSec autoalojado y de código abierto: prioriza lo explotable, dice cómo corregirlo y comprueba que la corrección funcionó, sin enviar tu código a ningún lado. Lo diseñé y lo construí con agentes de IA; hoy lo publica Arodium, la empresa que cofundé.',
       steps: [
-        ['detectar', 'Siete motores open source y 66 reglas propias, sin duplicados entre ellos.'],
+        ['detectar', 'Siete motores open source y 66 reglas propias, incluidas las de errores típicos del código escrito con IA.'],
         ['priorizar', 'Cada aviso se cruza con CISA KEV y EPSS.'],
         ['corregir', 'El comando exacto para tu gestor de paquetes.'],
         ['verificar', 'Reverify y checks en el PR que pueden bloquear el merge.'],
@@ -124,7 +137,7 @@ export const T = {
       repo: 'código fuente',
     },
     projects: [
-      { perm: 'drwxr-xr-x', name: 'pitangus/', href: '#s-pitangus', desc: 'AppSec autoalojado y de código abierto. Detalle arriba.' },
+      { perm: 'drwxr-xr-x', name: 'pitangus/', href: '#s-pitangus', desc: 'AppSec autoalojado y de código abierto, construido con agentes de IA. Detalle arriba.' },
       { perm: 'drwxr-xr-x', name: 'arodium/', desc: 'Cofundador. Equipo colombiano de software a medida, web y seguridad de aplicaciones.' },
       { perm: 'drwxr-xr-x', name: 'rizomas/', desc: 'Sitio académico que visibiliza a la mujer en Latinoamérica. Angular y .NET.' },
       { perm: '-rwxr-xr-x', name: 'marketplace-sync', desc: 'Automatización de tiendas en Amazon y Walmart vía APIs oficiales. Python y JavaScript.' },
@@ -146,6 +159,7 @@ export const T = {
     contact: { note: 'Canal cifrado establecido. Escríbeme por cualquiera de estos medios.' },
     help: [
       ['whoami', 'quién soy'],
+      ['ia', 'cómo uso y aseguro la IA'],
       ['skills · experiencia · pitangus', 'secciones completas'],
       ['proyectos · educacion · contacto', 'más secciones'],
       ['ls [ruta]', 'lista el contenido'],
@@ -156,7 +170,7 @@ export const T = {
       ['lang es | en', 'cambia el idioma'],
       ['exit', 'vuelve a la vista de perfil'],
     ],
-    suggest: ['help', 'whoami', 'ls', 'cd pitangus', 'cat README.md', 'experiencia', 'contacto', 'exit'],
+    suggest: ['help', 'whoami', 'ia', 'ls', 'cd pitangus', 'cat README.md', 'experiencia', 'contacto', 'exit'],
     msg: {
       notFound: 'zsh: comando no encontrado: ',
       notFoundHint: 'Escribe help para ver los comandos.',
@@ -179,10 +193,10 @@ export const T = {
   },
 
   en: {
-    title: 'Brayan Sepúlveda · Software Engineer, AppSec & SecOps',
-    desc: 'Software engineer and cybersecurity specialist in Medellín, Colombia. I automate SAST, DAST, SCA and IaC in the pipeline (DevSecOps). Creator of Pitangus.',
+    title: 'Brayan Sepúlveda · AppSec, DevSecOps & AI Security Engineer',
+    desc: 'Software and AppSec engineer in Medellín, Colombia. I automate SAST, DAST, SCA and IaC in CI/CD, secure AI code and LLM apps, and built Pitangus.',
     ogLocale: 'en_US',
-    jobTitle: 'Software engineer · SecOps / AppSec',
+    jobTitle: 'Software engineer · AppSec / DevSecOps · AI security',
     ui: {
       lang: 'ES', langLabel: 'Cambiar a español',
       view: 'View', profile: 'profile', terminal: 'terminal',
@@ -195,12 +209,13 @@ export const T = {
         'Type help to list everything, or tap a command below. Whatever ls lists can be tapped too. exit takes you back to the profile view.',
       ],
     },
-    titles: { whoami: 'About', skills: 'Skills', experiencia: 'Experience', pitangus: 'Pitangus', proyectos: 'Projects', educacion: 'Education', contacto: 'Contact' },
-    dirs: { whoami: 'about', skills: 'skills', experiencia: 'experience', pitangus: 'pitangus', proyectos: 'projects', educacion: 'education', contacto: 'contact' },
+    titles: { whoami: 'About', ia: 'Applied AI', skills: 'Skills', experiencia: 'Experience', pitangus: 'Pitangus', proyectos: 'Projects', educacion: 'Education', contacto: 'Contact' },
+    dirs: { whoami: 'about', ia: 'ai', skills: 'skills', experiencia: 'experience', pitangus: 'pitangus', proyectos: 'projects', educacion: 'education', contacto: 'contact' },
     files: { profile: 'profile.txt', status: 'status.txt' },
     cta: { mail: 'Email me', linkedin: 'LinkedIn', pitangus: 'See Pitangus', terminal: 'Open terminal' },
     cmds: {
       whoami: 'whoami',
+      ia: 'cat ai/*.md',
       skills: 'nmap -sV --script=skills brayan',
       experiencia: 'git log --graph experience',
       pitangus: 'pitangus --about',
@@ -209,28 +224,40 @@ export const T = {
       contacto: 'contact --secure',
     },
     whoami: {
-      role: 'Software engineer · SecOps / AppSec',
-      place: 'Medellín, Colombia · UTC−5',
-      summary: 'A developer at heart who now secures the software lifecycle. I turn regulatory and risk requirements into automated controls inside the pipeline: SAST, DAST, SCA and IaC, shifted left. I prioritize real risk, not noise.',
-      status: 'Open to freelance projects and AppSec consulting.',
+      role: 'Software engineer · AppSec / DevSecOps · AI security',
+      place: 'Medellín, Colombia · UTC−5 · 4+ years building software, 2+ in security',
+      summary: 'I have spent more than four years building software and more than two securing it. At Siigo I lead vulnerability management: I automate SAST, DAST, SCA, secret and IaC scanning inside the pipelines so teams fix issues before they ship, and I prioritize by real risk, not alert volume. I work with AI agents every day and know where they fail: I review the code they write and the LLM applications built on them.',
+      status: 'Available for freelance projects and consulting in AppSec, DevSecOps and AI security.',
+    },
+    ia: {
+      lead: 'I use AI to ship faster and I know how to secure it. Both at once, with a human review at every step.',
+      items: [
+        ['agentic development', 'I build with AI agents such as Claude Code and review every change: diff, tests and a security audit before the merge. Pitangus was built this way.', 'agents.md'],
+        ['AI-generated code', 'I catch the mistakes AI-written code makes most often. Pitangus ships its own rules for them and for Supabase and Firebase access control.', 'ai-code.md'],
+        ['LLM applications', 'I review LLM, agent and RAG applications for prompt injection, unvalidated output, data leakage and excessive agency, following the OWASP Top 10 for LLM Applications and MITRE ATLAS.', 'llm-apps.md'],
+        ['security operations', 'At Siigo I use AI to speed up finding triage, report writing and audit evidence collection.', 'operations.md'],
+      ],
+      rule: 'Working rule: the tool proposes, I decide. I verify every finding and every change before applying it.',
     },
     skills: {
       report: 'Nmap scan report for brayan (Medellín, CO)',
       up: 'Host is up (0.0012s latency).',
       head: ['PORT', 'STATE', 'SERVICE', 'VERSION'],
       rows: [
-        ['443/tcp', 'appsec', 'SAST · DAST · SCA · IaC · secret detection'],
+        ['443/tcp', 'appsec', 'SAST · DAST · SCA · IaC · secret detection · threat modeling'],
         ['22/tcp', 'secops', 'Vulnerability management (TVM) · pentest triage · remediation'],
-        ['8443/tcp', 'devsecops', 'GitHub Enterprise · GitHub Actions · shift-left'],
+        ['8443/tcp', 'devsecops', 'GitHub Enterprise · GitHub Actions · CI/CD · shift-left'],
+        ['11434/tcp', 'ai-security', 'OWASP Top 10 for LLM · prompt injection · MITRE ATLAS · AI-generated code'],
         ['2376/tcp', 'containers', 'Docker · Trivy · Grype · Checkov'],
-        ['9443/tcp', 'grc', 'Audit evidence · regulatory compliance'],
-        ['3000/tcp', 'fullstack', 'Node.js · NestJS · React · Angular · SOLID design'],
-        ['5432/tcp', 'data', 'SQL · NoSQL'],
+        ['9443/tcp', 'grc', 'Audit evidence · SOC 2 · ISO 27001 · regulatory compliance'],
+        ['3000/tcp', 'fullstack', 'Node.js · NestJS · React · Angular · Python · SOLID design'],
+        ['5432/tcp', 'data', 'PostgreSQL · SQL · NoSQL'],
       ],
       scripts: [
-        ['languages', 'Python, JavaScript, Shell, Go, C#, Java, PHP'],
+        ['languages', 'Python, JavaScript, TypeScript, Shell, Go, C#, Java, PHP'],
         ['iac', 'Terraform, Docker, Azure'],
-        ['tooling', 'Checkov, Grype, Trivy, Dependabot, Gitleaks, TruffleHog, Fluid Attacks'],
+        ['tooling', 'Checkov, Grype, Trivy, Dependabot, Betterleaks, TruffleHog, Opengrep, OSV-Scanner, zizmor, Fluid Attacks'],
+        ['ai', 'Claude Code and AI agents, OWASP Top 10 for LLM, MITRE ATLAS'],
       ],
       done: 'Nmap done: 1 IP address (1 host up) scanned',
     },
@@ -238,19 +265,19 @@ export const T = {
       {
         hash: 'a3f9c21', head: true, company: 'Siigo', role: 'SecOps / Full-stack developer', date: 'Mar 2024 — present · Medellín',
         bullets: [
-          'I lead the TVM (Threat & Vulnerability Management) and IPY (Information Protection & Governance) domains, aligned with the company-wide security strategy.',
-          'Designed early detection and remediation automation (SAST, DAST, SCA and IaC) that shortens exposure time in the pipelines.',
-          'I run GitHub Enterprise: access controls, security settings and automated workflows for the engineering teams.',
-          'I manage internal and external pentest reports and coordinate mitigation plans with development.',
-          'Streamlined evidence collection for compliance audits (GRC).',
-          'Integrated continuous scanning with Checkov, Grype, Trivy, Dependabot, Gitleaks, TruffleHog and Fluid Attacks alongside the SRE team.',
+          'Lead the TVM (Threat & Vulnerability Management) and IPY (Information Protection & Governance) domains, aligned with the company-wide security strategy.',
+          'Automated early detection and remediation in the pipelines (SAST, DAST, SCA, secrets and IaC) to shorten each vulnerability\'s exposure window.',
+          'Integrated continuous scanning with Checkov, Grype, Trivy, Dependabot, Betterleaks, TruffleHog and Fluid Attacks alongside the SRE team.',
+          'Run GitHub Enterprise: access controls, security policies and automated workflows for the engineering teams.',
+          'Manage internal and external pentest reports and drive mitigation plans with development through to closure.',
+          'Streamlined evidence collection for GRC audits and brought AI into finding triage and reporting, always with human validation.',
         ],
-        tags: ['GitHub Enterprise', 'Terraform', 'Docker', 'Python', 'Shell', 'Go', 'C#', 'Azure'],
+        tags: ['GitHub Enterprise', 'GitHub Actions', 'Terraform', 'Docker', 'Python', 'Go', 'Azure', 'AI'],
       },
       {
         hash: '7be1d04', company: 'Elite Automation Group', role: 'Software developer', date: 'Aug 2023 — Mar 2024',
         bullets: [
-          'Automated large-scale management of Amazon and Walmart stores through their official APIs.',
+          'Automated large-scale management of Amazon and Walmart stores through their official APIs, cutting operating time and manual errors.',
           'Built internal software for warehouse managers and operators in the US: logistics, returns and inventory.',
         ],
         tags: ['Python', 'JavaScript', 'Amazon and Walmart APIs'],
@@ -258,7 +285,7 @@ export const T = {
       {
         hash: '51c0e9a', company: 'Operación Éxito Colombia', role: 'Software developer', date: 'Feb 2023 — Sep 2023',
         bullets: [
-          'Sole developer at the company: custom software and maintenance of every project.',
+          'Sole developer at the company: designed, built and maintained all of its custom software.',
           'Customized Moodle for schools and city halls and built education apps with React, Angular and Spring Boot.',
         ],
         tags: ['React', 'Angular', 'Spring Boot', 'PHP', 'Moodle'],
@@ -274,9 +301,9 @@ export const T = {
     pitangus: {
       meta: 'v0.15 · beta · AGPL-3.0',
       tagline: 'Spot it. Fix it. Prove it.',
-      lead: 'Self-hosted, open-source application security that never sends your code anywhere. I created it; it is now published by Arodium, the company I co-founded.',
+      lead: 'Security tools warn a lot and prove little. Pitangus is self-hosted, open-source AppSec: it prioritizes what is exploitable, tells you how to fix it and confirms the fix worked, without sending your code anywhere. I designed it and built it with AI agents; it is now published by Arodium, the company I co-founded.',
       steps: [
-        ['find', 'Seven open-source engines and 66 custom rules, with no duplicates across them.'],
+        ['find', 'Seven open-source engines and 66 custom rules, including rules for the typical mistakes in AI-written code.'],
         ['prioritize', 'Every advisory is checked against CISA KEV and EPSS.'],
         ['fix', 'The exact command for your package manager.'],
         ['verify', 'Reverify, plus pull request checks that can block the merge.'],
@@ -287,7 +314,7 @@ export const T = {
       repo: 'source code',
     },
     projects: [
-      { perm: 'drwxr-xr-x', name: 'pitangus/', href: '#s-pitangus', desc: 'Self-hosted, open-source AppSec. Details above.' },
+      { perm: 'drwxr-xr-x', name: 'pitangus/', href: '#s-pitangus', desc: 'Self-hosted, open-source AppSec, built with AI agents. Details above.' },
       { perm: 'drwxr-xr-x', name: 'arodium/', desc: 'Co-founder. A Colombian team building custom software, websites and application security.' },
       { perm: 'drwxr-xr-x', name: 'rizomas/', desc: 'Academic site that gives visibility to women in Latin America. Angular and .NET.' },
       { perm: '-rwxr-xr-x', name: 'marketplace-sync', desc: 'Amazon and Walmart store automation through their official APIs. Python and JavaScript.' },
@@ -309,6 +336,7 @@ export const T = {
     contact: { note: 'Encrypted channel established. Reach me through any of these.' },
     help: [
       ['whoami', 'who I am'],
+      ['ai', 'how I use and secure AI'],
       ['skills · experience · pitangus', 'full sections'],
       ['projects · education · contact', 'more sections'],
       ['ls [path]', 'list contents'],
@@ -319,7 +347,7 @@ export const T = {
       ['lang es | en', 'switch language'],
       ['exit', 'back to the profile view'],
     ],
-    suggest: ['help', 'whoami', 'ls', 'cd pitangus', 'cat README.md', 'experience', 'contact', 'exit'],
+    suggest: ['help', 'whoami', 'ai', 'ls', 'cd pitangus', 'cat README.md', 'experience', 'contact', 'exit'],
     msg: {
       notFound: 'zsh: command not found: ',
       notFoundHint: 'Type help to list the commands.',
@@ -369,6 +397,13 @@ export const R = {
       <p class="muted">${esc(w.place)}</p>
       <p class="summary">${esc(w.summary)}</p>
       <p class="status"><span class="ok">[ OK ]</span> ${esc(w.status)}</p>${cta}`;
+  },
+  ia(c) {
+    const a = c.ia;
+    return `<p class="lead">${esc(a.lead)}</p>
+      <ol class="pipeline ai">${a.items.map(([s, d], i) =>
+        `<li><span class="step"><span class="n">0${i + 1}</span>${esc(s)}</span><p>${esc(d)}</p></li>`).join('')}</ol>
+      <p class="rule"><span class="ok">$</span> ${esc(a.rule)}</p>`;
   },
   skills(c) {
     const s = c.skills;
@@ -423,6 +458,7 @@ export const FILES = {
     { n: c.files.profile, b: () => `<p>${esc(c.whoami.summary)}</p>` },
     { n: c.files.status, b: () => `<p><span class="ok">[ OK ]</span> ${esc(c.whoami.status)}</p>` },
   ],
+  ia: (c) => c.ia.items.map(([s, d, n]) => ({ n, b: () => `<p class="hl">${esc(s)}</p><p>${esc(d)}</p>` })),
   skills: (c) => c.skills.rows.map(([port, svc, ver]) => ({ n: svc, b: () => `<p><span class="muted">${port} open</span> ${esc(ver)}</p>` })),
   experiencia: (c) => c.jobs.map((j) => ({ n: slug(j.company), b: () => jobHtml(j) })),
   pitangus: (c) => [

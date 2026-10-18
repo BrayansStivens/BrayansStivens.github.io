@@ -12,8 +12,8 @@ const attr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').rep
 const pathFor = (l) => (l === 'en' ? '/en/' : '/');
 
 const OG_ALT = {
-  es: 'Brayan Sepúlveda, ingeniero de software y especialista en AppSec y SecOps',
-  en: 'Brayan Sepúlveda, software engineer and AppSec / SecOps specialist',
+  es: 'Brayan Sepúlveda, ingeniero de software especializado en AppSec, DevSecOps y seguridad de IA',
+  en: 'Brayan Sepúlveda, software engineer specialized in AppSec, DevSecOps and AI security',
 };
 
 function jsonLd(lang) {
@@ -52,6 +52,8 @@ function jsonLd(lang) {
           'Application Security', 'DevSecOps', 'SecOps', 'SAST', 'DAST', 'SCA', 'Infrastructure as Code',
           'Vulnerability Management', 'GRC', 'GitHub Enterprise', 'GitHub Actions', 'Terraform', 'Docker',
           'Node.js', 'NestJS', 'React', 'Angular', 'Python',
+          'AI Security', 'OWASP Top 10 for LLM Applications', 'MITRE ATLAS', 'Prompt Injection',
+          'AI-assisted development', 'Threat Modeling', 'SOC 2', 'ISO 27001',
         ],
         sameAs: [LINKS.linkedin, LINKS.github],
       },
