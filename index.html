@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Brayan Sepúlveda · SecOps / AppSec</title>
+<meta name="description" content="Ingeniero de software y especialista en ciberseguridad (SecOps, AppSec, GRC). Automatizo SAST, DAST, SCA e IaC en el pipeline. Creador de Pitangus.">
+<meta name="author" content="Brayan Stivens Sepúlveda Molina">
+<meta name="theme-color" content="#020303">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Brayan Sepúlveda · SecOps / AppSec">
+<meta property="og:description" content="Ingeniero de software y especialista en ciberseguridad. Creador de Pitangus, AppSec autoalojado y de código abierto.">
+<meta property="og:url" content="https://brayansstivens.github.io/">
+<link rel="canonical" href="https://brayansstivens.github.io/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=VT323&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script src="main.js" defer></script>
+</head>
+<body>
+<!--
+  recon: si estás leyendo esto, vas bien.
+  Hay una flag escondida. Los buenos pentesters empiezan por lo obvio.
+-->
+<a class="skip" href="#profile" id="skip">Ir al contenido</a>
+
+<div class="term" id="term">
+  <header class="bar">
+    <div class="bar-row">
+      <span class="bar-title">brayan@sepulveda: <span id="barPath"><span class="tl">~</span></span> <span class="bar-shell">zsh</span></span>
+      <div class="bar-actions">
+        <div class="seg" role="group" id="viewGroup" aria-label="Vista">
+          <button type="button" id="viewProfile" aria-pressed="true">perfil</button>
+          <button type="button" id="viewTerm" aria-pressed="false">terminal</button>
+        </div>
+        <button type="button" id="langBtn" class="btn" aria-label="Switch to English">EN</button>
+      </div>
+    </div>
+    <nav id="chips" class="chips" aria-label="Secciones"></nav>
+  </header>
+
+  <main class="screen" id="profile">
+    <div id="sections"></div>
+    <noscript>
+      <div class="noscript">
+        <h1>Brayan Stivens Sepúlveda Molina</h1>
+        <p>Ingeniero de software · SecOps / AppSec · Medellín, Colombia</p>
+        <p>Creador de <a href="https://pitangus.dev">Pitangus</a>, AppSec autoalojado y de código abierto.</p>
+        <p><a href="https://www.linkedin.com/in/brayansstivens">LinkedIn</a> · <a href="https://github.com/BrayansStivens">GitHub</a></p>
+      </div>
+    </noscript>
+  </main>
+
+  <section class="console" id="console" aria-label="Terminal" hidden>
+    <div class="console-scroll" id="consoleScroll">
+      <div class="out" id="out" aria-live="polite"></div>
+      <form id="promptForm" class="prompt-line" autocomplete="off">
+        <label for="prompt" class="ps1" id="ps1"></label>
+        <input id="prompt" name="prompt" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go">
+      </form>
+    </div>
+    <div class="suggest" id="suggest"></div>
+  </section>
+</div>
+</body>
+</html>
