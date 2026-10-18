@@ -33,7 +33,7 @@
         welcome: [
           'Bienvenido a la terminal de Brayan Sepúlveda.',
           'Funciona como una consola real: ls, cd, cat, open, Tab para autocompletar y flechas para el historial.',
-          'Escribe help para ver todo, o pulsa un comando de abajo. exit vuelve a la vista de perfil.',
+          'Escribe help para ver todo, o pulsa un comando de abajo. Lo que lista ls también se puede pulsar. exit vuelve a la vista de perfil.',
         ],
       },
       titles: { whoami: 'Sobre mí', skills: 'Habilidades', experiencia: 'Experiencia', pitangus: 'Pitangus', proyectos: 'Proyectos', educacion: 'Educación', contacto: 'Contacto' },
@@ -177,6 +177,8 @@
         cv: 'El currículum completo está en LinkedIn:',
         openUsage: 'uso: open pitangus | repo | github | linkedin | email',
         opening: 'Abriendo ',
+        fileHint: (n) => `${n} es un archivo. Para leerlo: cat ${n}`,
+        foundAt: (p) => `Está en ${p}. Prueba: cat ${p}`,
       },
     },
 
@@ -192,7 +194,7 @@
         welcome: [
           'Welcome to Brayan Sepúlveda\'s terminal.',
           'It works like a real shell: ls, cd, cat, open, Tab to complete and arrow keys for history.',
-          'Type help to list everything, or tap a command below. exit takes you back to the profile view.',
+          'Type help to list everything, or tap a command below. Whatever ls lists can be tapped too. exit takes you back to the profile view.',
         ],
       },
       titles: { whoami: 'About', skills: 'Skills', experiencia: 'Experience', pitangus: 'Pitangus', proyectos: 'Projects', educacion: 'Education', contacto: 'Contact' },
@@ -336,6 +338,8 @@
         cv: 'The full résumé lives on LinkedIn:',
         openUsage: 'usage: open pitangus | repo | github | linkedin | email',
         opening: 'Opening ',
+        fileHint: (n) => `${n} is a file. To read it: cat ${n}`,
+        foundAt: (p) => `It lives at ${p}. Try: cat ${p}`,
       },
     },
   };
@@ -565,14 +569,38 @@
 
   const findFile = (dir, name) => FILES[dir](t()).find((f) => f.n.toLowerCase() === name.toLowerCase());
 
+  // Cada elemento de ls se puede pulsar: una carpeta hace cd + ls, un archivo hace cat
+  const fsBtn = (label, cls, cmd, then) =>
+    `<button type="button" class="fs ${cls}" data-cmd="${esc(cmd)}"${then ? ` data-then="${esc(then)}"` : ''}>${esc(label)}</button>`;
+
   function listing(dir) {
     const c = t();
     if (dir === null) {
-      const items = ORDER.map((k) => `<span class="dir">${esc(c.dirs[k])}/</span>`).concat('<span>flag.txt</span>');
+      const items = ORDER.map((k) => fsBtn(`${c.dirs[k]}/`, 'dir', `cd ~/${c.dirs[k]}`, 'ls'))
+        .concat(fsBtn('flag.txt', 'file', 'cat ~/flag.txt'));
       return `<div class="grid">${items.join('')}</div>`;
     }
-    return `<div class="grid">${FILES[dir](c).map((f) => `<span${f.link ? ' class="lnk"' : ''}>${esc(f.n)}</span>`).join('')}</div>`;
+    const base = dir === cwd ? '' : `~/${c.dirs[dir]}/`;
+    return `<div class="grid">${FILES[dir](c).map((f) => fsBtn(f.n, f.link ? 'lnk' : 'file', `cat ${base}${f.n}`)).join('')}</div>`;
   }
+
+  // Busca un archivo por nombre en todas las carpetas, para sugerir dónde está
+  function locate(name) {
+    const n = name.replace(/^.*\//, '').toLowerCase();
+    for (const k of ORDER) {
+      const f = FILES[k](t()).find((x) => x.n.toLowerCase() === n);
+      if (f) return `~/${t().dirs[k]}/${f.n}`;
+    }
+    return null;
+  }
+
+  function withHint(err, hint) {
+    const w = document.createElement('div');
+    w.append(errLine(err));
+    if (hint) w.append(node('muted', hint));
+    return w;
+  }
+  const foundHint = (name) => { const p = locate(name); return p ? t().msg.foundAt(p) : null; };
 
   function openUrl(url) {
     if (url.startsWith('mailto:')) location.href = url;
@@ -602,10 +630,10 @@
         const target = parts.find((p, i) => i > 0 && !p.startsWith('-'));
         if (!target) return listing(cwd);
         const r = resolve(target);
-        if (!r) return errLine(`ls: ${target}: ${c.msg.noSuch}`);
+        if (!r) return withHint(`ls: ${target}: ${c.msg.noSuch}`, foundHint(target));
         if (r.file) {
           const ok = (r.dir === null && r.file === 'flag.txt') || (r.dir !== null && findFile(r.dir, r.file));
-          return ok ? node('', r.file) : errLine(`ls: ${target}: ${c.msg.noSuch}`);
+          return ok ? node('', r.file) : withHint(`ls: ${target}: ${c.msg.noSuch}`, foundHint(target));
         }
         return listing(r.dir);
       }
@@ -613,8 +641,8 @@
         if (!arg || arg === '~') { prevCwd = cwd; cwd = null; setPrompt(); return null; }
         if (arg === '-') { [cwd, prevCwd] = [prevCwd, cwd]; setPrompt(); return node('', pathOf(cwd)); }
         const r = resolve(arg);
-        if (!r) return errLine(`cd: ${c.msg.noSuch}: ${arg}`);
-        if (r.file) return errLine(`cd: ${c.msg.notDir}: ${arg}`);
+        if (!r) return withHint(`cd: ${c.msg.noSuch}: ${arg}`, foundHint(arg));
+        if (r.file) return withHint(`cd: ${c.msg.notDir}: ${arg}`, c.msg.fileHint(arg));
         prevCwd = cwd; cwd = r.dir; setPrompt();
         return null;
       }
@@ -623,11 +651,11 @@
       case 'cat': case 'less': case 'more': case 'head': {
         if (!arg) return null;
         const r = resolve(arg);
-        if (!r) return errLine(`cat: ${arg}: ${c.msg.noSuch}`);
+        if (!r) return withHint(`cat: ${arg}: ${c.msg.noSuch}`, foundHint(arg));
         if (!r.file) return errLine(`cat: ${arg}: ${c.msg.isDir}`);
         if (r.dir === null) return errLine(c.msg.flag);
         const f = findFile(r.dir, r.file);
-        if (!f) return errLine(`cat: ${arg}: ${c.msg.noSuch}`);
+        if (!f) return withHint(`cat: ${arg}: ${c.msg.noSuch}`, foundHint(arg));
         return f.link ? `<p>${f.link.startsWith('mailto:') ? `<a href="${esc(f.link)}">${esc(f.label)}</a>` : ext(f.link, f.link)}</p>` : f.b();
       }
       case 'open': case 'xdg-open': case 'start': {
@@ -667,9 +695,10 @@
       case 'exit': case 'logout': case 'quit': case 'salir': case 'gui': case 'perfil': case 'profile':
         return 'EXIT';
       default: {
-        const wrap = document.createElement('div');
-        wrap.append(errLine(c.msg.notFound + parts[0]), node('muted', c.msg.notFoundHint));
-        return wrap;
+        // Si el nombre es un archivo, se sugiere cómo leerlo
+        const here = cwd && findFile(cwd, parts[0]);
+        const hint = here ? c.msg.fileHint(here.n) : (foundHint(parts[0]) || c.msg.notFoundHint);
+        return withHint(c.msg.notFound + parts[0], hint);
       }
     }
   }
@@ -822,6 +851,14 @@
       el.input.value = '';
       el.scroll.scrollTop = el.scroll.scrollHeight;
     }
+  });
+
+  el.out.addEventListener('click', (e) => {
+    const b = e.target.closest('.fs');
+    if (!b) return;
+    run(b.dataset.cmd);
+    if (b.dataset.then) run(b.dataset.then);
+    if (matchMedia('(pointer: fine)').matches) el.input.focus({ preventScroll: true });
   });
 
   el.suggest.addEventListener('click', (e) => {

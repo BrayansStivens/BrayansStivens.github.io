@@ -404,9 +404,21 @@ p { margin: 0 0 var(--s-3); }
 .out .entry { margin-bottom: var(--s-5); }
 .out .cmd { margin: 0 0 var(--s-2); }
 .out .output p { margin-bottom: var(--s-2); }
-.out .grid { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-6); }
-.out .dir { color: var(--cyan); }
-.out .lnk { color: var(--amber); }
+/* Listado tipo ls: elementos en línea, sin flex (los botones se estiraban) */
+.out .grid > * { display: inline-block; vertical-align: top; margin: 0 var(--s-6) var(--s-1) 0; }
+.out .fs {
+  white-space: nowrap;
+  line-height: inherit;
+  padding: 0;
+  font: inherit;
+  color: var(--text);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.out .fs:hover { text-decoration: underline; text-underline-offset: 3px; }
+.out .fs.dir { color: var(--cyan); }
+.out .fs.lnk { color: var(--amber); }
 .out .help { display: grid; grid-template-columns: max-content 1fr; gap: var(--s-1) var(--s-6); margin: 0; }
 .out .help dt { color: var(--strong); }
 .out .help dd { margin: 0; color: var(--muted); }
