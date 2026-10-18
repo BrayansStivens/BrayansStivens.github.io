@@ -10,14 +10,18 @@ export const LINKS = {
   github: 'https://github.com/BrayansStivens',
   pitangus: 'https://pitangus.dev',
   pitangusRepo: 'https://github.com/Pitangus-Dev/pitangus',
+  cv: (lang) => `/cv/brayan-sepulveda-cv-${lang}.pdf`,
 };
 
-export const ORDER = ['whoami', 'ia', 'skills', 'experiencia', 'pitangus', 'proyectos', 'educacion', 'contacto'];
+export const mailto = (subject) => `mailto:${LINKS.email}?subject=${encodeURIComponent(subject)}`;
+
+export const ORDER = ['whoami', 'ia', 'servicios', 'skills', 'experiencia', 'pitangus', 'proyectos', 'educacion', 'contacto'];
 
 export const T = {
   es: {
     title: 'Brayan Sepúlveda · AppSec, DevSecOps y seguridad de IA',
     desc: 'Ingeniero de software y AppSec en Medellín. Automatizo SAST, DAST, SCA e IaC en CI/CD, aseguro código y apps con IA (OWASP LLM) y creé Pitangus.',
+    code: 'es',
     ogLocale: 'es_CO',
     jobTitle: 'Ingeniero de software · AppSec / DevSecOps · Seguridad de IA',
     ui: {
@@ -32,13 +36,14 @@ export const T = {
         'Escribe help para ver todo, o pulsa un comando de abajo. Lo que lista ls también se puede pulsar. exit vuelve a la vista de perfil.',
       ],
     },
-    titles: { whoami: 'Sobre mí', ia: 'IA aplicada', skills: 'Habilidades', experiencia: 'Experiencia', pitangus: 'Pitangus', proyectos: 'Proyectos', educacion: 'Educación', contacto: 'Contacto' },
-    dirs: { whoami: 'sobre-mi', ia: 'ia', skills: 'skills', experiencia: 'experiencia', pitangus: 'pitangus', proyectos: 'proyectos', educacion: 'educacion', contacto: 'contacto' },
+    titles: { whoami: 'Sobre mí', ia: 'IA aplicada', servicios: 'Servicios', skills: 'Habilidades', experiencia: 'Experiencia', pitangus: 'Pitangus', proyectos: 'Proyectos', educacion: 'Educación', contacto: 'Contacto' },
+    dirs: { whoami: 'sobre-mi', ia: 'ia', servicios: 'servicios', skills: 'skills', experiencia: 'experiencia', pitangus: 'pitangus', proyectos: 'proyectos', educacion: 'educacion', contacto: 'contacto' },
     files: { profile: 'perfil.txt', status: 'estado.txt' },
-    cta: { mail: 'Escríbeme', linkedin: 'LinkedIn', pitangus: 'Ver Pitangus', terminal: 'Abrir terminal' },
+    cta: { mail: 'Escríbeme', linkedin: 'LinkedIn', cv: 'Descargar CV', terminal: 'Abrir terminal' },
     cmds: {
       whoami: 'whoami',
       ia: 'cat ia/*.md',
+      servicios: 'systemctl list-units --type=service',
       skills: 'nmap -sV --script=skills brayan',
       experiencia: 'git log --graph experiencia',
       pitangus: 'pitangus --about',
@@ -61,6 +66,38 @@ export const T = {
         ['operación de seguridad', 'En Siigo uso IA para acelerar el triage de hallazgos, la redacción de reportes y la recolección de evidencias de auditoría.', 'operacion.md'],
       ],
       rule: 'Regla de trabajo: la herramienta propone, yo dispongo. Verifico cada hallazgo y cada cambio antes de aplicarlo.',
+    },
+    servicios: {
+      lead: 'Trabajo por proyecto, en remoto. Estos son los encargos que mejor resuelvo:',
+      deliv: 'Entrego',
+      ask: 'Pedir propuesta',
+      items: [
+        {
+          unit: 'appsec-audit.service', name: 'Auditoría AppSec',
+          desc: 'Reviso un repositorio o una aplicación: código, dependencias, secretos, IaC y pipeline. Cada hallazgo, verificado y priorizado por riesgo real.',
+          deliv: 'informe con hallazgos verificados y plan de remediación por prioridad.',
+          subject: 'Auditoría AppSec',
+        },
+        {
+          unit: 'devsecops-ci.service', name: 'DevSecOps en tu CI/CD',
+          desc: 'Integro SAST, SCA, secretos e IaC en GitHub Actions u otro CI, con umbrales que frenan lo grave sin bloquear al equipo.',
+          deliv: 'pipelines configurados, políticas documentadas y traspaso al equipo.',
+          subject: 'DevSecOps en CI/CD',
+        },
+        {
+          unit: 'ai-security.service', name: 'Seguridad de IA',
+          desc: 'Reviso aplicaciones con LLM, agentes o RAG y el código escrito con IA: prompt injection, fuga de datos, permisos excesivos.',
+          deliv: 'informe según el OWASP Top 10 para LLM, con correcciones concretas.',
+          subject: 'Seguridad de IA',
+        },
+        {
+          unit: 'compliance-evidence.service', name: 'Cumplimiento y evidencias',
+          desc: 'Preparo los controles técnicos y las evidencias para una auditoría SOC 2 o ISO 27001 a partir de lo que ya tienes.',
+          deliv: 'mapa de controles, evidencias técnicas y brechas por cerrar.',
+          subject: 'Cumplimiento SOC 2 / ISO 27001',
+        },
+      ],
+      more: '¿Necesitas software a medida? Lo construimos con seguridad desde el diseño en Arodium, la empresa que cofundé.',
     },
     skills: {
       report: 'Nmap scan report for brayan (Medellín, CO)',
@@ -135,6 +172,29 @@ export const T = {
       ],
       supply: 'Cadena de suministro verificable: imágenes fijadas por digest, releases firmadas y OpenSSF Scorecard público.',
       repo: 'código fuente',
+      case: {
+        problemT: 'El problema',
+        problem: 'Un equipo pequeño que quiere AppSec acaba con cinco herramientas sueltas, alertas duplicadas, ninguna prioridad clara y servicios que le piden subir su código a la nube.',
+        decisionsT: 'Decisiones',
+        decisions: [
+          'Autoalojado y AGPL-3.0: el código y los hallazgos nunca salen de tu servidor.',
+          'Un solo servicio sobre FastAPI, PostgreSQL y React que orquesta siete motores abiertos y elimina los duplicados entre ellos.',
+          'Priorizar por explotabilidad real (CISA KEV y EPSS), no por la severidad que declara cada herramienta.',
+          'Cerrar el ciclo: guía de corrección por gestor de paquetes, Reverify y checks en el PR.',
+          'Cadena de suministro verificable: motores fijados por digest e imágenes firmadas y analizadas con Trivy antes de publicarse.',
+          'Desarrollado con agentes de IA, con una auditoría de seguridad antes de cada PR.',
+        ],
+        resultT: 'Resultado',
+        results: [
+          'Beta pública v0.15, en inglés y español, con releases firmadas.',
+          'Se instala con Docker en menos de un minuto más las descargas, usando imágenes precompiladas.',
+          'OpenSSF Scorecard público y proyecto registrado en OpenSSF Best Practices.',
+          'Evidencias listas para SOC 2 e ISO 27001 y modelado de amenazas ligado a los hallazgos reales.',
+        ],
+        featuresT: 'Qué hace',
+        shotsT: 'Capturas con datos de prueba (organización ficticia).',
+        shots: [],
+      },
     },
     projects: [
       { perm: 'drwxr-xr-x', name: 'pitangus/', href: '#s-pitangus', desc: 'AppSec autoalojado y de código abierto, construido con agentes de IA. Detalle arriba.' },
@@ -160,6 +220,7 @@ export const T = {
     help: [
       ['whoami', 'quién soy'],
       ['ia', 'cómo uso y aseguro la IA'],
+      ['servicios', 'qué puedo hacer por ti'],
       ['skills · experiencia · pitangus', 'secciones completas'],
       ['proyectos · educacion · contacto', 'más secciones'],
       ['ls [ruta]', 'lista el contenido'],
@@ -170,7 +231,7 @@ export const T = {
       ['lang es | en', 'cambia el idioma'],
       ['exit', 'vuelve a la vista de perfil'],
     ],
-    suggest: ['help', 'whoami', 'ia', 'ls', 'cd pitangus', 'cat README.md', 'experiencia', 'contacto', 'exit'],
+    suggest: ['help', 'whoami', 'ia', 'servicios', 'ls', 'cd pitangus', 'cat README.md', 'experiencia', 'contacto', 'exit'],
     msg: {
       notFound: 'zsh: comando no encontrado: ',
       notFoundHint: 'Escribe help para ver los comandos.',
@@ -184,8 +245,8 @@ export const T = {
       lang: 'Idioma: español.',
       langUsage: 'uso: lang es | en',
       theme: 'Solo hay modo oscuro. Las consolas de verdad no tienen modo claro.',
-      cv: 'El currículum completo está en LinkedIn:',
-      openUsage: 'uso: open pitangus | repo | github | linkedin | email',
+      cv: 'CV en PDF:',
+      openUsage: 'uso: open pitangus | repo | github | linkedin | email | cv',
       opening: 'Abriendo ',
       fileHint: (n) => `${n} es un archivo. Para leerlo: cat ${n}`,
       foundAt: (p) => `Está en ${p}. Prueba: cat ${p}`,
@@ -195,6 +256,7 @@ export const T = {
   en: {
     title: 'Brayan Sepúlveda · AppSec, DevSecOps & AI Security Engineer',
     desc: 'Software and AppSec engineer in Medellín, Colombia. I automate SAST, DAST, SCA and IaC in CI/CD, secure AI code and LLM apps, and built Pitangus.',
+    code: 'en',
     ogLocale: 'en_US',
     jobTitle: 'Software engineer · AppSec / DevSecOps · AI security',
     ui: {
@@ -209,13 +271,14 @@ export const T = {
         'Type help to list everything, or tap a command below. Whatever ls lists can be tapped too. exit takes you back to the profile view.',
       ],
     },
-    titles: { whoami: 'About', ia: 'Applied AI', skills: 'Skills', experiencia: 'Experience', pitangus: 'Pitangus', proyectos: 'Projects', educacion: 'Education', contacto: 'Contact' },
-    dirs: { whoami: 'about', ia: 'ai', skills: 'skills', experiencia: 'experience', pitangus: 'pitangus', proyectos: 'projects', educacion: 'education', contacto: 'contact' },
+    titles: { whoami: 'About', ia: 'Applied AI', servicios: 'Services', skills: 'Skills', experiencia: 'Experience', pitangus: 'Pitangus', proyectos: 'Projects', educacion: 'Education', contacto: 'Contact' },
+    dirs: { whoami: 'about', ia: 'ai', servicios: 'services', skills: 'skills', experiencia: 'experience', pitangus: 'pitangus', proyectos: 'projects', educacion: 'education', contacto: 'contact' },
     files: { profile: 'profile.txt', status: 'status.txt' },
-    cta: { mail: 'Email me', linkedin: 'LinkedIn', pitangus: 'See Pitangus', terminal: 'Open terminal' },
+    cta: { mail: 'Email me', linkedin: 'LinkedIn', cv: 'Download CV', terminal: 'Open terminal' },
     cmds: {
       whoami: 'whoami',
       ia: 'cat ai/*.md',
+      servicios: 'systemctl list-units --type=service',
       skills: 'nmap -sV --script=skills brayan',
       experiencia: 'git log --graph experience',
       pitangus: 'pitangus --about',
@@ -238,6 +301,38 @@ export const T = {
         ['security operations', 'At Siigo I use AI to speed up finding triage, report writing and audit evidence collection.', 'operations.md'],
       ],
       rule: 'Working rule: the tool proposes, I decide. I verify every finding and every change before applying it.',
+    },
+    servicios: {
+      lead: 'I work per project, remotely. These are the engagements I deliver best:',
+      deliv: 'Deliverable',
+      ask: 'Request a proposal',
+      items: [
+        {
+          unit: 'appsec-audit.service', name: 'AppSec audit',
+          desc: 'I review a repository or an application: code, dependencies, secrets, IaC and pipeline. Every finding verified and ranked by real risk.',
+          deliv: 'a report of verified findings and a prioritized remediation plan.',
+          subject: 'AppSec audit',
+        },
+        {
+          unit: 'devsecops-ci.service', name: 'DevSecOps in your CI/CD',
+          desc: 'I wire SAST, SCA, secret and IaC scanning into GitHub Actions or your CI, with thresholds that stop what matters without blocking the team.',
+          deliv: 'configured pipelines, documented policies and a handover to your team.',
+          subject: 'DevSecOps in CI/CD',
+        },
+        {
+          unit: 'ai-security.service', name: 'AI security',
+          desc: 'I review LLM, agent and RAG applications and AI-written code: prompt injection, data leakage, excessive permissions.',
+          deliv: 'a report mapped to the OWASP Top 10 for LLM Applications, with concrete fixes.',
+          subject: 'AI security',
+        },
+        {
+          unit: 'compliance-evidence.service', name: 'Compliance and evidence',
+          desc: 'I prepare the technical controls and evidence for a SOC 2 or ISO 27001 audit, starting from what you already have.',
+          deliv: 'a control map, technical evidence and the gaps left to close.',
+          subject: 'SOC 2 / ISO 27001 compliance',
+        },
+      ],
+      more: 'Need custom software? We build it secure by design at Arodium, the company I co-founded.',
     },
     skills: {
       report: 'Nmap scan report for brayan (Medellín, CO)',
@@ -312,6 +407,29 @@ export const T = {
       ],
       supply: 'A supply chain you can check: digest-pinned images, signed releases and a public OpenSSF Scorecard.',
       repo: 'source code',
+      case: {
+        problemT: 'The problem',
+        problem: 'A small team that wants AppSec ends up with five disconnected tools, duplicate alerts, no clear priority and services that ask them to upload their code to the cloud.',
+        decisionsT: 'Decisions',
+        decisions: [
+          'Self-hosted and AGPL-3.0: code and findings never leave your server.',
+          'A single service on FastAPI, PostgreSQL and React that orchestrates seven open engines and removes duplicates across them.',
+          'Prioritize by real exploitability (CISA KEV and EPSS), not by the severity each tool reports.',
+          'Close the loop: per-package-manager fix guidance, Reverify and pull request checks.',
+          'A verifiable supply chain: digest-pinned engines and images signed and scanned with Trivy before release.',
+          'Built with AI agents, with a security audit before every pull request.',
+        ],
+        resultT: 'Outcome',
+        results: [
+          'Public beta v0.15, in English and Spanish, with signed releases.',
+          'Installs with Docker in under a minute plus downloads, using prebuilt images.',
+          'Public OpenSSF Scorecard and a project registered with OpenSSF Best Practices.',
+          'Evidence ready for SOC 2 and ISO 27001, and threat modeling tied to real findings.',
+        ],
+        featuresT: 'What it does',
+        shotsT: 'Screenshots with test data (fictional organization).',
+        shots: [],
+      },
     },
     projects: [
       { perm: 'drwxr-xr-x', name: 'pitangus/', href: '#s-pitangus', desc: 'Self-hosted, open-source AppSec, built with AI agents. Details above.' },
@@ -337,6 +455,7 @@ export const T = {
     help: [
       ['whoami', 'who I am'],
       ['ai', 'how I use and secure AI'],
+      ['services', 'what I can do for you'],
       ['skills · experience · pitangus', 'full sections'],
       ['projects · education · contact', 'more sections'],
       ['ls [path]', 'list contents'],
@@ -347,7 +466,7 @@ export const T = {
       ['lang es | en', 'switch language'],
       ['exit', 'back to the profile view'],
     ],
-    suggest: ['help', 'whoami', 'ai', 'ls', 'cd pitangus', 'cat README.md', 'experience', 'contact', 'exit'],
+    suggest: ['help', 'whoami', 'ai', 'services', 'ls', 'cd pitangus', 'cat README.md', 'experience', 'contact', 'exit'],
     msg: {
       notFound: 'zsh: command not found: ',
       notFoundHint: 'Type help to list the commands.',
@@ -361,8 +480,8 @@ export const T = {
       lang: 'Language: English.',
       langUsage: 'usage: lang es | en',
       theme: 'Dark mode only. Real terminals do not ship a light mode.',
-      cv: 'The full résumé lives on LinkedIn:',
-      openUsage: 'usage: open pitangus | repo | github | linkedin | email',
+      cv: 'CV as PDF:',
+      openUsage: 'usage: open pitangus | repo | github | linkedin | email | cv',
       opening: 'Opening ',
       fileHint: (n) => `${n} is a file. To read it: cat ${n}`,
       foundAt: (p) => `It lives at ${p}. Try: cat ${p}`,
@@ -389,7 +508,7 @@ export const R = {
     const cta = inTerm ? '' : `<div class="cta">
         <a class="btn-cta primary" href="mailto:${LINKS.email}">${esc(c.cta.mail)}</a>
         <a class="btn-cta" href="${LINKS.linkedin}" target="_blank" rel="noopener noreferrer">${esc(c.cta.linkedin)}</a>
-        <a class="btn-cta" href="#s-pitangus">${esc(c.cta.pitangus)}</a>
+        <a class="btn-cta" href="${LINKS.cv(c.code)}" download>${esc(c.cta.cv)}</a>
         <button type="button" class="btn-cta ghost" data-open-term>${esc(c.cta.terminal)}</button>
       </div>`;
     return `${inTerm ? `<p class="name">${name}</p>` : `<h1 class="name">${name}<span class="cursor" aria-hidden="true"></span></h1>`}
@@ -404,6 +523,19 @@ export const R = {
       <ol class="pipeline ai">${a.items.map(([s, d], i) =>
         `<li><span class="step"><span class="n">0${i + 1}</span>${esc(s)}</span><p>${esc(d)}</p></li>`).join('')}</ol>
       <p class="rule"><span class="ok">$</span> ${esc(a.rule)}</p>`;
+  },
+  servicios(c) {
+    const v = c.servicios;
+    return `<p class="lead">${esc(v.lead)}</p>
+      <ul class="services">${v.items.map((it) => `
+        <li class="svc">
+          <div class="svc-unit"><span class="ok">active</span> ${esc(it.unit)}</div>
+          <h3 class="svc-name">${esc(it.name)}</h3>
+          <p>${esc(it.desc)}</p>
+          <p class="svc-deliv"><span class="muted">${esc(v.deliv)}:</span> ${esc(it.deliv)}</p>
+          <a class="svc-cta" href="${esc(mailto(it.subject))}">${esc(v.ask)}</a>
+        </li>`).join('')}</ul>
+      <p class="muted">${esc(v.more)}</p>`;
   },
   skills(c) {
     const s = c.skills;
@@ -426,6 +558,13 @@ export const R = {
         <div class="card-head"><span class="pname">pitangus</span><span class="muted">${esc(p.meta)}</span></div>
         <p class="tagline">${esc(p.tagline)}</p>
         <p class="lead">${esc(p.lead)}</p>
+        <div class="case">
+          <div><h3 class="case-h">${esc(p.case.problemT)}</h3><p>${esc(p.case.problem)}</p></div>
+          <div><h3 class="case-h">${esc(p.case.decisionsT)}</h3><ul class="bullets">${p.case.decisions.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></div>
+          <div><h3 class="case-h">${esc(p.case.resultT)}</h3><ul class="bullets">${p.case.results.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></div>
+        </div>
+        ${p.case.shots.length ? `<div class="shots">${p.case.shots.map((sh) => `<figure class="shot"><a href="${sh.src}"><img src="${sh.src}" width="${sh.w}" height="${sh.h}" alt="${esc(sh.alt)}" loading="lazy" decoding="async"></a><figcaption>${esc(sh.caption)}</figcaption></figure>`).join('')}</div><p class="muted shots-note">${esc(p.case.shotsT)}</p>` : ''}
+        <h3 class="case-h">${esc(p.case.featuresT)}</h3>
         <ol class="pipeline">${p.steps.map(([s, d], i) =>
           `<li><span class="step"><span class="n">0${i + 1}</span>${esc(s)}</span><p>${esc(d)}</p></li>`).join('')}</ol>
         <p class="muted">${esc(p.supply)}</p>
@@ -446,6 +585,7 @@ export const R = {
         <dt>email</dt><dd><a href="mailto:${LINKS.email}">${LINKS.email}</a></dd>
         <dt>linkedin</dt><dd>${ext(LINKS.linkedin, 'linkedin.com/in/brayansstivens')}</dd>
         <dt>github</dt><dd>${ext(LINKS.github, 'github.com/BrayansStivens')}</dd>
+        <dt>cv</dt><dd><a href="${LINKS.cv(c.code)}" download>${esc(LINKS.cv(c.code).split('/').pop())}</a></dd>
       </dl>`;
   },
 };
@@ -459,6 +599,7 @@ export const FILES = {
     { n: c.files.status, b: () => `<p><span class="ok">[ OK ]</span> ${esc(c.whoami.status)}</p>` },
   ],
   ia: (c) => c.ia.items.map(([s, d, n]) => ({ n, b: () => `<p class="hl">${esc(s)}</p><p>${esc(d)}</p>` })),
+  servicios: (c) => c.servicios.items.map((it) => ({ n: it.unit, b: () => `<p class="hl">${esc(it.name)}</p><p>${esc(it.desc)}</p><p><span class="muted">${esc(c.servicios.deliv)}:</span> ${esc(it.deliv)}</p><p><a href="${esc(mailto(it.subject))}">${esc(c.servicios.ask)}</a></p>` })),
   skills: (c) => c.skills.rows.map(([port, svc, ver]) => ({ n: svc, b: () => `<p><span class="muted">${port} open</span> ${esc(ver)}</p>` })),
   experiencia: (c) => c.jobs.map((j) => ({ n: slug(j.company), b: () => jobHtml(j) })),
   pitangus: (c) => [
@@ -471,10 +612,11 @@ export const FILES = {
     { n: c.edu.file1, b: () => eduItems(c.edu) },
     { n: c.edu.file2, b: () => eduCerts(c.edu) },
   ],
-  contacto: () => [
+  contacto: (c) => [
     { n: 'email', link: `mailto:${LINKS.email}`, label: LINKS.email },
     { n: 'linkedin', link: LINKS.linkedin },
     { n: 'github', link: LINKS.github },
+    { n: 'cv.pdf', link: LINKS.cv(c.code) },
   ],
 };
 // Secciones y menú de la vista de perfil, como HTML

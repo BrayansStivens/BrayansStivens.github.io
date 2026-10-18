@@ -14,6 +14,7 @@ import { esc, LINKS, ORDER, T, ext, pathHtml, ps1, R, FILES, profileHtml } from 
   // Nombres aceptados como sección o carpeta, en cualquier idioma
   const ALIASES = {
     whoami: 'whoami', about: 'whoami', 'sobre-mi': 'whoami',
+    servicios: 'servicios', services: 'servicios', systemctl: 'servicios',
     ia: 'ia', ai: 'ia', 'ia-aplicada': 'ia',
     skills: 'skills', habilidades: 'skills', nmap: 'skills',
     experiencia: 'experiencia', experience: 'experiencia', exp: 'experiencia', git: 'experiencia',
@@ -22,7 +23,7 @@ import { esc, LINKS, ORDER, T, ext, pathHtml, ps1, R, FILES, profileHtml } from 
     educacion: 'educacion', 'educación': 'educacion', education: 'educacion',
     contacto: 'contacto', contact: 'contacto',
   };
-  const COMMANDS = ['help', 'whoami', 'ia', 'ai', 'skills', 'experiencia', 'experience', 'pitangus', 'proyectos', 'projects', 'educacion',
+  const COMMANDS = ['help', 'whoami', 'ia', 'ai', 'servicios', 'services', 'skills', 'experiencia', 'experience', 'pitangus', 'proyectos', 'projects', 'educacion',
     'education', 'contacto', 'contact', 'ls', 'cd', 'cat', 'open', 'pwd', 'history', 'clear', 'lang', 'cv', 'echo', 'date', 'exit'];
 
   let lang = 'es';
@@ -163,7 +164,7 @@ import { esc, LINKS, ORDER, T, ext, pathHtml, ps1, R, FILES, profileHtml } from 
 
   const OPEN = {
     pitangus: LINKS.pitangus, 'pitangus.dev': LINKS.pitangus, repo: LINKS.pitangusRepo, 'repo.git': LINKS.pitangusRepo,
-    github: LINKS.github, linkedin: LINKS.linkedin, email: `mailto:${LINKS.email}`, mail: `mailto:${LINKS.email}`, cv: LINKS.linkedin,
+    github: LINKS.github, linkedin: LINKS.linkedin, email: `mailto:${LINKS.email}`, mail: `mailto:${LINKS.email}`,
   };
 
   function exec(line) {
@@ -214,7 +215,7 @@ import { esc, LINKS, ORDER, T, ext, pathHtml, ps1, R, FILES, profileHtml } from 
       }
       case 'open': case 'xdg-open': case 'start': {
         if (!arg) return node('muted', c.msg.openUsage);
-        let url = OPEN[arg.toLowerCase()];
+        let url = ['cv', 'cv.pdf', 'resume'].includes(arg.toLowerCase()) ? LINKS.cv(lang) : OPEN[arg.toLowerCase()];
         if (!url) {
           const r = resolve(arg);
           const f = r && r.dir && r.file && findFile(r.dir, r.file);
@@ -239,7 +240,7 @@ import { esc, LINKS, ORDER, T, ext, pathHtml, ps1, R, FILES, profileHtml } from 
       case 'history':
         return hist.map((h, i) => `<p><span class="muted">${String(i + 1).padStart(3, ' ')}</span>&nbsp;&nbsp;${esc(h)}</p>`).join('');
       case 'cv': case 'resume': case 'curriculum':
-        return `<p>${esc(c.msg.cv)} ${ext(LINKS.linkedin, 'linkedin.com/in/brayansstivens')}</p>`;
+        return `<p>${esc(c.msg.cv)} <a href="${LINKS.cv(lang)}" download>${esc(LINKS.cv(lang).split('/').pop())}</a></p>`;
       case 'date':
         return node('', new Date().toString());
       case 'echo':

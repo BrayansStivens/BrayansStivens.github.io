@@ -363,6 +363,40 @@ p { margin: 0 0 var(--s-3); }
 .pipeline.ai { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .rule { margin: 0; color: var(--muted); }
 .output > .lead { margin-bottom: 0; }
+/* Caso de estudio de Pitangus */
+.case { display: grid; gap: var(--s-5); margin: var(--s-5) 0; }
+.case-h { margin: 0 0 var(--s-2); font-family: var(--vt); font-size: var(--vt-md); font-weight: 400; line-height: 1.1; color: var(--amber); }
+.case p, .case .bullets { margin-bottom: 0; }
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); margin: var(--s-5) 0 var(--s-2); }
+.shot { margin: 0; }
+.shot:first-child { grid-column: 1 / -1; }
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--bar); }
+.shot figcaption { margin-top: var(--s-2); font-size: var(--fs-sm); color: var(--muted); }
+.shots-note { margin-bottom: var(--s-5); font-size: var(--fs-sm); }
+
+/* Servicios */
+.services {
+  list-style: none;
+  margin: var(--s-5) 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+.svc {
+  display: flex;
+  flex-direction: column;
+  padding: var(--s-5);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.012);
+}
+.svc-unit { margin-bottom: var(--s-2); font-size: var(--fs-xs); color: var(--muted); }
+.svc-name { margin: 0 0 var(--s-3); font-family: var(--vt); font-size: var(--vt-md); font-weight: 400; line-height: 1.1; color: var(--strong); }
+.svc p { font-size: 14px; }
+.svc-deliv { margin-bottom: var(--s-4); }
+.svc-cta { margin-top: auto; align-self: flex-start; font-size: 14px; font-weight: 500; }
+.svc-cta::after { content: " ->"; }
 .links { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); margin: var(--s-4) 0 0; }
 .links a::before { content: "-> "; color: var(--muted); }
 
@@ -478,6 +512,8 @@ p { margin: 0 0 var(--s-3); }
   .screen { padding: var(--s-6) var(--gutter) var(--s-7); }
   .block { margin-bottom: var(--s-7); }
   .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .services { grid-template-columns: 1fr; }
+  .shots { grid-template-columns: 1fr; }
   .ls li { grid-template-columns: 1fr; gap: var(--s-1); }
   .ls .perm { display: none; }
   .term.is-term { height: 100vh; height: 100dvh; }
@@ -491,6 +527,7 @@ p { margin: 0 0 var(--s-3); }
   .bar-shell { display: none; }
   .card { padding: var(--s-4); }
   .pipeline, .pipeline.ai { grid-template-columns: 1fr; }
+  .svc { padding: var(--s-4); }
   .cta { display: grid; grid-template-columns: 1fr 1fr; }
   .btn-cta { padding: 0 var(--s-2); font-size: 13px; }
   .nmap thead { display: none; }
