@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>{{title}}</title>
+<meta name="description" content="{{desc}}">
+<meta name="author" content="Brayan Stivens Sepúlveda Molina">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#020303">
+<link rel="canonical" href="{{url}}">
+<link rel="alternate" hreflang="es" href="{{site}}/">
+<link rel="alternate" hreflang="en" href="{{site}}/en/">
+<link rel="alternate" hreflang="x-default" href="{{site}}/">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Brayan Sepúlveda">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{desc}}">
+<meta property="og:url" content="{{url}}">
+<meta property="og:locale" content="{{ogLocale}}">
+<meta property="og:locale:alternate" content="{{ogLocaleAlt}}">
+<meta property="og:image" content="{{site}}/og-{{lang}}.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ogAlt}}">
+<meta property="profile:first_name" content="Brayan">
+<meta property="profile:last_name" content="Sepúlveda">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{title}}">
+<meta name="twitter:description" content="{{desc}}">
+<meta name="twitter:image" content="{{site}}/og-{{lang}}.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/vt323-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script type="module" src="/main.js"></script>
+<script type="application/ld+json">{{jsonld}}</script>
+</head>
+<body>
+<!--
+  recon: si estás leyendo esto, vas bien.
+  Hay una flag escondida. Los buenos pentesters empiezan por lo obvio.
+-->
+<a class="skip" href="#profile" id="skip">{{skip}}</a>
+
+<div class="term" id="term">
+  <header class="bar">
+    <div class="bar-row">
+      <span class="bar-title">brayan@sepulveda: <span id="barPath"><span class="tl">~</span></span> <span class="bar-shell">zsh</span></span>
+      <div class="bar-actions">
+        <div class="seg" role="group" id="viewGroup" aria-label="{{viewLabel}}">
+          <button type="button" id="viewProfile" aria-pressed="true">{{profileLabel}}</button>
+          <button type="button" id="viewTerm" aria-pressed="false">{{terminalLabel}}</button>
+        </div>
+        <a id="langBtn" class="btn" href="{{otherPath}}" hreflang="{{other}}" lang="{{other}}">{{langText}} <span class="sr-only">{{langLabel}}</span></a>
+      </div>
+    </div>
+    <nav id="chips" class="chips" aria-label="{{chipsLabel}}">{{chips}}</nav>
+  </header>
+
+  <main class="screen" id="profile">
+    <div id="sections">
+{{sections}}
+    </div>
+  </main>
+
+  <section class="console" id="console" aria-label="Terminal" hidden>
+    <div class="console-scroll" id="consoleScroll">
+      <div class="out" id="out" aria-live="polite"></div>
+      <form id="promptForm" class="prompt-line" autocomplete="off">
+        <label for="prompt" class="ps1" id="ps1"></label>
+        <input id="prompt" name="prompt" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="{{placeholder}}">
+      </form>
+    </div>
+    <div class="suggest" id="suggest"></div>
+  </section>
+</div>
+</body>
+</html>

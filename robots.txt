@@ -3,3 +3,5 @@ Allow: /
 
 # Nada interesante por aquí.
 Disallow: /flag.txt
+
+Sitemap: https://brayansstivens.github.io/sitemap.xml
