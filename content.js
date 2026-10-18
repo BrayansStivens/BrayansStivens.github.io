@@ -193,7 +193,11 @@ export const T = {
         ],
         featuresT: 'Qué hace',
         shotsT: 'Capturas con datos de prueba (organización ficticia).',
-        shots: [],
+        shots: [
+          { src: '/img/pitangus/pitangus-overview-es.webp', w: 1800, h: 1125, alt: 'Resumen del panel de Pitangus: puntuación de riesgo, hallazgos abiertos, plazos, tasa de corrección y vulnerabilidades en CISA KEV', caption: 'Resumen: riesgo, plazos y lo que ya está en explotación activa.' },
+          { src: '/img/pitangus/pitangus-findings-es.webp', w: 1800, h: 1125, alt: 'Hallazgos de una organización en Pitangus priorizados en actuar ya, atender, críticos y en CISA KEV', caption: 'Hallazgos de toda una organización, priorizados.' },
+          { src: '/img/pitangus/pitangus-fix-es.webp', w: 1800, h: 1125, alt: 'Detalle de un hallazgo en Pitangus con CISA KEV, EPSS, la guía para corregirlo, el comando exacto y el botón Reverificar', caption: 'Cómo corregirlo, con el comando exacto y Reverificar.' },
+        ],
       },
     },
     projects: [
@@ -428,7 +432,11 @@ export const T = {
         ],
         featuresT: 'What it does',
         shotsT: 'Screenshots with test data (fictional organization).',
-        shots: [],
+        shots: [
+          { src: '/img/pitangus/pitangus-overview-en.webp', w: 1800, h: 1125, alt: 'Pitangus panel overview: risk score, open findings, deadlines, fix rate and vulnerabilities in CISA KEV', caption: 'Overview: risk, deadlines and what is already being exploited.' },
+          { src: '/img/pitangus/pitangus-findings-en.webp', w: 1800, h: 1125, alt: 'Findings for an organization in Pitangus ranked into act now, attend, critical and CISA KEV', caption: 'Findings across a whole organization, prioritized.' },
+          { src: '/img/pitangus/pitangus-fix-en.webp', w: 1800, h: 1125, alt: 'Pitangus finding detail with CISA KEV, EPSS, fix guidance, the exact command and the Reverify button', caption: 'How to fix it, with the exact command and Reverify.' },
+        ],
       },
     },
     projects: [

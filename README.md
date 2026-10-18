@@ -24,6 +24,14 @@ node scripts/build.mjs
 
 Esto escribe `index.html`, `en/index.html` y `sitemap.xml`.
 
+El CV en PDF (`cv/`, es/en) también sale de `content.js`; regenéralo cuando cambien los textos (usa Chrome en local):
+
+```bash
+node scripts/cv.mjs
+```
+
+Las capturas de Pitangus (`img/pitangus/`) se tomaron de una instancia demo aislada con la organización ficticia Lapis Labs (`make demo FULL=1`), nunca de una instancia con datos reales.
+
 ## Probar en local
 
 ```bash
